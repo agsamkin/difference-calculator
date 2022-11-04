@@ -15,3 +15,5 @@ jobs:
 
       - name: Execute Gradle build
         run: ./gradlew build
+
+      - run: make say-test
