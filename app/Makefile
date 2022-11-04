@@ -11,4 +11,7 @@ test:
 lint:
 	./gradlew checkstyleMain checkstyleTest
 
+report:
+	./gradlew jacocoTestReport
+
 .PHONY: build
