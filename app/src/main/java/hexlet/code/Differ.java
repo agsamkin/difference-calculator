@@ -5,7 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -32,7 +35,7 @@ public class Differ {
 
     }
 
-    private static String getDiff(Map<String, Object> map1, Map<String, Object> map2) {
+    public static String getDiff(Map<String, Object> map1, Map<String, Object> map2) {
         Set<String> keys = Stream.concat(map1.keySet().stream(), map2.keySet().stream())
                 .collect(Collectors.toCollection(TreeSet::new));
 
@@ -54,5 +57,4 @@ public class Differ {
         diff.append("}");
         return diff.toString();
     }
-
 }

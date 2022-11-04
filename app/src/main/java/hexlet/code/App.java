@@ -8,12 +8,9 @@ import static picocli.CommandLine.Command;
 import static picocli.CommandLine.Option;
 import static picocli.CommandLine.Parameters;
 
-@Command(
-        name = "gendiff",
-        description = "Compares two configuration files and shows a difference."
-)
-public class App implements Callable<Integer> {
-
+@Command(name = "gendiff",
+        description = "Compares two configuration files and shows a difference.")
+public final class App implements Callable<Integer> {
     @Option(names = {"-f", "--format"}, description = "output format [default: stylish]", paramLabel = "format")
     private String format;
 
@@ -40,5 +37,4 @@ public class App implements Callable<Integer> {
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);
     }
-
 }
