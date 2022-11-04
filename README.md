@@ -6,3 +6,7 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/fec0680afba7d70590a0/maintainability)](https://codeclimate.com/github/agsamkin/java-project-71/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/fec0680afba7d70590a0/test_coverage)](https://codeclimate.com/github/agsamkin/java-project-71/test_coverage)
+
+### Demo
+
+[![asciicast](https://asciinema.org/a/dp2Y5IWfp8HEpKqUxasJqU51e.svg)](https://asciinema.org/a/dp2Y5IWfp8HEpKqUxasJqU51e)
