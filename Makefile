@@ -1,4 +1,15 @@
+.DEFAULT_GOAL := run-dist
+
 run-dist:
-	./app/build/install/app/bin/app
-say-test:
-	echo 'Test!'
+	make -C app run-dist
+
+build:
+	make -C app build
+
+test:
+	make -C app test
+
+lint:
+	make -C app lint
+
+.PHONY: build
