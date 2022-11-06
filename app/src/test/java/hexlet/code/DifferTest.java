@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 class DifferTest {
-
     public static final int TIMEOUT_BEFORE = 50;
     public static final int TIMEOUT_AFTER = 20;
 
@@ -42,8 +41,8 @@ class DifferTest {
 
     @Test
     void getDiffTest() {
-        String diff = Differ.getDiff(json1, json2);
-        Assertions.assertEquals(diff, expected);
+        String actual = Differ.getDiff(json1, json2);
+        Assertions.assertEquals(actual, expected);
     }
 }
 
