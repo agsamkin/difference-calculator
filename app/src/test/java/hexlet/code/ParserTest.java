@@ -18,8 +18,7 @@ class ParserTest {
                     "timeout": 50,
                     "proxy": "123.234.53.22",
                     "follow": false
-                }        
-                """;
+                }""";
 
         Map<String, Object> expected = new TreeMap<>();
         expected.put("host", "hexlet.io");
@@ -38,8 +37,7 @@ class ParserTest {
                     "timeout": 20,
                     "verbose": true,
                     "host": "hexlet.io"
-                }        
-                """;
+                }""";
 
         Map<String, Object> expected = new TreeMap<>();
         expected.put("timeout", TIMEOUT_AFTER);
@@ -56,8 +54,7 @@ class ParserTest {
                 "host": "hexlet.io"
                 "timeout": 50
                 "proxy": "123.234.53.22"
-                "follow": false      
-                """;
+                "follow": false""";
 
         Map<String, Object> expected = new TreeMap<>();
         expected.put("host", "hexlet.io");
@@ -74,8 +71,7 @@ class ParserTest {
         String content = """
                 "timeout": 20
                 "verbose": true
-                "host": "hexlet.io"       
-                """;
+                "host": "hexlet.io" """;
 
         Map<String, Object> expected = new TreeMap<>();
         expected.put("timeout", TIMEOUT_AFTER);
