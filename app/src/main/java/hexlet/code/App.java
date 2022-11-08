@@ -12,7 +12,7 @@ import static picocli.CommandLine.Parameters;
         description = "Compares two configuration files and shows a difference.")
 public final class App implements Callable<Integer> {
     @Option(names = {"-f", "--format"}, description = "output format [default: stylish]", paramLabel = "format")
-    private String format;
+    private String format = "stylish";
 
     @Option(names = {"-h", "--help"}, description = "Show this help message and exit.", usageHelp = true)
     private boolean usageHelpRequested;
@@ -28,7 +28,7 @@ public final class App implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        String diff = Differ.generate(filepath1, filepath2);
+        String diff = Differ.generate(filepath1, filepath2, format);
         System.out.println(diff);
         return 0;
     }

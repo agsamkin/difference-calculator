@@ -1,5 +1,7 @@
 package hexlet.code;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -7,32 +9,41 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public final class Differ {
-    public static String generate(String filePath1, String filePath2) throws Exception {
+    public static String generate(String filePath1, String filePath2, String format) throws Exception {
         Map<String, Object> map1 = Parser.parse(filePath1);
         Map<String, Object> map2 = Parser.parse(filePath2);
-        return getDiff(map1, map2);
+
+        List<DiffElement> diff = getDiff(map1, map2);
+        return Formatter.format(format, diff);
     }
 
-    public static String getDiff(Map<String, Object> map1, Map<String, Object> map2) {
+    public static List<DiffElement> getDiff(Map<String, Object> map1, Map<String, Object> map2) {
+
+        List<DiffElement> diff = new LinkedList<>();
+
         Set<String> keys = Stream.concat(map1.keySet().stream(), map2.keySet().stream())
                 .collect(Collectors.toCollection(TreeSet::new));
 
-        StringBuilder diff = new StringBuilder("{\n");
         for (String key : keys) {
             if (map1.containsKey(key) && map2.containsKey(key)) {
-                if (map1.get(key).equals(map2.get(key))) {
-                    diff.append("  ").append(key).append(": ").append(map1.get(key)).append("\n");
+                if (map1.get(key) == null && map2.get(key) == null) {
+                    diff.add(new DiffElement(DiffElement.DiffElementType.NOT_CHANGED, key, map1.get(key)));
+                } else if (map1.get(key) == null || map2.get(key) == null) {
+                    diff.add(new DiffElement(DiffElement.DiffElementType.REMOVED, key, map1.get(key)));
+                    diff.add(new DiffElement(DiffElement.DiffElementType.ADDED, key, map2.get(key)));
+                } else if (map1.get(key).equals(map2.get(key))) {
+                    diff.add(new DiffElement(DiffElement.DiffElementType.NOT_CHANGED, key, map1.get(key)));
                 } else {
-                    diff.append("- ").append(key).append(": ").append(map1.get(key)).append("\n");
-                    diff.append("+ ").append(key).append(": ").append(map2.get(key)).append("\n");
+                    diff.add(new DiffElement(DiffElement.DiffElementType.REMOVED, key, map1.get(key)));
+                    diff.add(new DiffElement(DiffElement.DiffElementType.ADDED, key, map2.get(key)));
                 }
             } else if (map1.containsKey(key)) {
-                diff.append("- ").append(key).append(": ").append(map1.get(key)).append("\n");
+                diff.add(new DiffElement(DiffElement.DiffElementType.REMOVED, key, map1.get(key)));
             } else {
-                diff.append("+ ").append(key).append(": ").append(map2.get(key)).append("\n");
+                diff.add(new DiffElement(DiffElement.DiffElementType.ADDED, key, map2.get(key)));
             }
         }
-        diff.append("}");
-        return diff.toString();
+
+        return diff;
     }
 }

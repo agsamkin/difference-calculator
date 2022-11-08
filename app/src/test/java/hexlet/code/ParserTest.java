@@ -1,84 +1,42 @@
 package hexlet.code;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 class ParserTest {
-    public static final int TIMEOUT_BEFORE = 50;
-    public static final int TIMEOUT_AFTER = 20;
+    private static Map<String, Object> expected;
+
+    @BeforeAll
+    public static void setUp() {
+        expected = new TreeMap<>();
+        expected.put("setting1", "Some value");
+        expected.put("setting2", 200);
+        expected.put("setting3", true);
+        expected.put("key1", "value1");
+        expected.put("numbers1", List.of(1, 2, 3, 4));
+        expected.put("numbers2", List.of(2, 3, 4, 5));
+        expected.put("id", 45);
+        expected.put("default", null);
+        expected.put("checked", false);
+        expected.put("numbers3", List.of(3, 4, 5));
+        expected.put("chars1", List.of("a", "b", "c"));
+        expected.put("chars2", List.of("d", "e", "f"));
+    }
 
     @Test
-    void parseJson1() throws Exception {
-        String content = """
-                {
-                    "host": "hexlet.io",
-                    "timeout": 50,
-                    "proxy": "123.234.53.22",
-                    "follow": false
-                }""";
-
-        Map<String, Object> expected = new TreeMap<>();
-        expected.put("host", "hexlet.io");
-        expected.put("timeout", TIMEOUT_BEFORE);
-        expected.put("proxy", "123.234.53.22");
-        expected.put("follow", false);
-
-        Map<String, Object> actual = Parser.parseJson(content);
+    void parseJsonTest() throws Exception {
+        Map<String, Object> actual = Parser.parse("src/test/resources/file1.json");
         Assertions.assertEquals(actual, expected);
     }
 
     @Test
-    void parseJson2() throws Exception {
-        String content = """
-                {
-                    "timeout": 20,
-                    "verbose": true,
-                    "host": "hexlet.io"
-                }""";
-
-        Map<String, Object> expected = new TreeMap<>();
-        expected.put("timeout", TIMEOUT_AFTER);
-        expected.put("verbose", true);
-        expected.put("host", "hexlet.io");
-
-        Map<String, Object> actual = Parser.parseJson(content);
-        Assertions.assertEquals(actual, expected);
-    }
-
-    @Test
-    void parseYml1() throws Exception {
-        String content = """
-                "host": "hexlet.io"
-                "timeout": 50
-                "proxy": "123.234.53.22"
-                "follow": false""";
-
-        Map<String, Object> expected = new TreeMap<>();
-        expected.put("host", "hexlet.io");
-        expected.put("timeout", TIMEOUT_BEFORE);
-        expected.put("proxy", "123.234.53.22");
-        expected.put("follow", false);
-
-        Map<String, Object> actual = Parser.parseYml(content);
-        Assertions.assertEquals(actual, expected);
-    }
-
-    @Test
-    void parseYml2() throws Exception {
-        String content = """
-                "timeout": 20
-                "verbose": true
-                "host": "hexlet.io" """;
-
-        Map<String, Object> expected = new TreeMap<>();
-        expected.put("timeout", TIMEOUT_AFTER);
-        expected.put("verbose", true);
-        expected.put("host", "hexlet.io");
-
-        Map<String, Object> actual = Parser.parseYml(content);
+    void parseYml() throws Exception {
+        Map<String, Object> actual = Parser.parse("src/test/resources/file1.yml");
         Assertions.assertEquals(actual, expected);
     }
 }
