@@ -21,10 +21,7 @@ public final class PlainFormatter implements Formatter {
                 continue;
             }
 
-            DiffElement next = null;
-            if (itr.hasNext()) {
-                next = itr.next();
-            }
+            DiffElement next = itr.hasNext() ? itr.next() : null;
 
             boolean isUpdated = false;
             if (current.diffElementType() == DiffElement.Type.REMOVED) {
