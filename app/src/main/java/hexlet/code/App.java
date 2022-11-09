@@ -2,6 +2,7 @@ package hexlet.code;
 
 import java.util.concurrent.Callable;
 
+import hexlet.code.formatters.Format;
 import picocli.CommandLine;
 
 import static picocli.CommandLine.Command;
@@ -12,7 +13,7 @@ import static picocli.CommandLine.Parameters;
         description = "Compares two configuration files and shows a difference.")
 public final class App implements Callable<Integer> {
     @Option(names = {"-f", "--format"}, description = "output format [default: stylish]", paramLabel = "format")
-    private String format = "stylish";
+    private Format format = Format.STYLISH;
 
     @Option(names = {"-h", "--help"}, description = "Show this help message and exit.", usageHelp = true)
     private boolean usageHelpRequested;
@@ -34,7 +35,9 @@ public final class App implements Callable<Integer> {
     }
 
     public static void main(String[] args) {
-        int exitCode = new CommandLine(new App()).execute(args);
+        int exitCode = new CommandLine(new App())
+                .setCaseInsensitiveEnumValuesAllowed(true)
+                .execute(args);
         System.exit(exitCode);
     }
 }
