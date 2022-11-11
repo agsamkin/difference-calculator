@@ -10,11 +10,11 @@ public final class StylishFormatter implements Formatter {
         StringBuilder sb = new StringBuilder("{\n");
         for (DiffElement diffElement : diff) {
             if (DiffElement.Type.ADDED.equals(diffElement.diffElementType())) {
-                sb.append("+ ");
+                sb.append(" + ");
             } else if (DiffElement.Type.REMOVED.equals(diffElement.diffElementType())) {
-                sb.append("- ");
+                sb.append(" - ");
             } else {
-                sb.append(" ".repeat(2));
+                sb.append(" ".repeat(3));
             }
             sb.append(diffElement.key()).append(": ").append(diffElement.value()).append("\n");
         }
