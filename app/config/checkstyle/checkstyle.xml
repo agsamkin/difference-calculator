@@ -38,11 +38,11 @@
     </module>
 
     <!-- https://checkstyle.org/config_filters.html#SuppressionFilter -->
-    <!--    <module name="SuppressionFilter">-->
-    <!--        <property name="file" value="${org.checkstyle.sun.suppressionfilter.config}"-->
-    <!--                  default="checkstyle-suppressions.xml.xml"/>-->
-    <!--        <property name="optional" value="true"/>-->
-    <!--    </module>-->
+    <module name="SuppressionFilter">
+        <property name="file" value="${org.checkstyle.sun.suppressionfilter.config}"
+                  default="checkstyle-suppressions.xml.xml"/>
+        <property name="optional" value="true"/>
+    </module>
 
     <module name="SuppressionFilter">
         <property name="file" value="${config_loc}/suppressions.xml"/>
