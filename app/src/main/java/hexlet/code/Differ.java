@@ -12,6 +12,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public final class Differ {
+    public static String generate(String filePath1, String filePath2) throws Exception {
+        return generate(filePath1, filePath2, "stylish");
+    }
+
     public static String generate(String filePath1, String filePath2, String format) throws Exception {
         Map<String, Object> map1 = Parser.parse(filePath1);
         Map<String, Object> map2 = Parser.parse(filePath2);
