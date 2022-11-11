@@ -7,12 +7,12 @@ import java.util.List;
 public interface Formatter {
     String format(List<DiffElement> diff);
 
-    static Formatter create(Format format) {
-        if (format == Format.STYLISH) {
+    static Formatter create(String format) {
+        if ("stylish".equals(format)) {
             return new StylishFormatter();
-        } else if (format == Format.PLAIN) {
+        } else if ("plain".equals(format)) {
             return new PlainFormatter();
-        } else if (format == Format.JSON) {
+        } else if ("json".equals(format)) {
             return new JsonFormatter();
         } else {
             throw new RuntimeException("Unsupported output format");

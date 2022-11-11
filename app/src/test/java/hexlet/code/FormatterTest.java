@@ -1,6 +1,5 @@
 package hexlet.code;
 
-import hexlet.code.formatters.Format;
 import hexlet.code.formatters.Formatter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -76,7 +75,7 @@ class FormatterTest {
                 + setting3: none
                 }""";
 
-        String actual = Formatter.create(Format.STYLISH).format(diff);
+        String actual = Formatter.create("stylish").format(diff);
         Assertions.assertEquals(expected, actual);
         System.out.println(actual);
     }
@@ -98,7 +97,7 @@ class FormatterTest {
                 Property 'setting2' was updated. From 200 to 300
                 Property 'setting3' was updated. From true to 'none'""";
 
-        String actual = Formatter.create(Format.PLAIN).format(diff);
+        String actual = Formatter.create("plain").format(diff);
         Assertions.assertEquals(expected, actual);
         System.out.println(actual);
     }
@@ -130,7 +129,7 @@ class FormatterTest {
                 + "\"- setting3\":true,"
                 + "\"+ setting3\":\"none\"}";
 
-        String actual = Formatter.create(Format.JSON).format(diff);
+        String actual = Formatter.create("json").format(diff);
         Assertions.assertEquals(expected, actual);
         System.out.println(actual);
     }
