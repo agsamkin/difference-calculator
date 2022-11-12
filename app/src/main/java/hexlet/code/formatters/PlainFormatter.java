@@ -26,7 +26,7 @@ public final class PlainFormatter implements Formatter {
             boolean isUpdated = false;
             if (current.diffElementType() == DiffElement.Type.REMOVED) {
 
-                if (next != null && current.key() == next.key()) {
+                if (next != null && next.key() != null && next.key().equals(current.key())) {
                     String valueFrom = getValue(current);
                     String valueTo = getValue(next);
                     String reportRow = String.format(updatedStringTemplate, next.key(), valueFrom, valueTo);

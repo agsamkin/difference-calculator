@@ -1,0 +1,154 @@
+[
+  {
+    "diffElementType": "NOT_CHANGED",
+    "key": "chars1",
+    "value": [
+      "a",
+      "b",
+      "c"
+    ]
+  },
+  {
+    "diffElementType": "REMOVED",
+    "key": "chars2",
+    "value": [
+      "d",
+      "e",
+      "f"
+    ]
+  },
+  {
+    "diffElementType": "ADDED",
+    "key": "chars2",
+    "value": false
+  },
+  {
+    "diffElementType": "REMOVED",
+    "key": "checked",
+    "value": false
+  },
+  {
+    "diffElementType": "ADDED",
+    "key": "checked",
+    "value": true
+  },
+  {
+    "diffElementType": "REMOVED",
+    "key": "default",
+    "value": null
+  },
+  {
+    "diffElementType": "ADDED",
+    "key": "default",
+    "value": [
+      "value1",
+      "value2"
+    ]
+  },
+  {
+    "diffElementType": "REMOVED",
+    "key": "id",
+    "value": 45
+  },
+  {
+    "diffElementType": "ADDED",
+    "key": "id",
+    "value": null
+  },
+  {
+    "diffElementType": "REMOVED",
+    "key": "key1",
+    "value": "value1"
+  },
+  {
+    "diffElementType": "ADDED",
+    "key": "key2",
+    "value": "value2"
+  },
+  {
+    "diffElementType": "NOT_CHANGED",
+    "key": "numbers1",
+    "value": [
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  {
+    "diffElementType": "REMOVED",
+    "key": "numbers2",
+    "value": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "diffElementType": "ADDED",
+    "key": "numbers2",
+    "value": [
+      22,
+      33,
+      44,
+      55
+    ]
+  },
+  {
+    "diffElementType": "REMOVED",
+    "key": "numbers3",
+    "value": [
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "diffElementType": "ADDED",
+    "key": "numbers4",
+    "value": [
+      4,
+      5,
+      6
+    ]
+  },
+  {
+    "diffElementType": "ADDED",
+    "key": "obj1",
+    "value": {
+      "nestedKey": "value",
+      "isNested": true
+    }
+  },
+  {
+    "diffElementType": "REMOVED",
+    "key": "setting1",
+    "value": "Some value"
+  },
+  {
+    "diffElementType": "ADDED",
+    "key": "setting1",
+    "value": "Another value"
+  },
+  {
+    "diffElementType": "REMOVED",
+    "key": "setting2",
+    "value": 200
+  },
+  {
+    "diffElementType": "ADDED",
+    "key": "setting2",
+    "value": 300
+  },
+  {
+    "diffElementType": "REMOVED",
+    "key": "setting3",
+    "value": true
+  },
+  {
+    "diffElementType": "ADDED",
+    "key": "setting3",
+    "value": "none"
+  }
+]

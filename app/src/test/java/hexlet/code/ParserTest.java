@@ -1,31 +1,34 @@
 package hexlet.code;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 class ParserTest {
+    private static final String JSON_FILE = "src/test/resources/parser_test/file1.json";
     private static Map<String, Object> expected;
 
     @BeforeAll
     public static void setUp() {
-        expected = new TreeMap<>();
-        expected.put("setting1", "Some value");
-        expected.put("setting2", 200);
-        expected.put("setting3", true);
-        expected.put("key1", "value1");
-        expected.put("numbers1", List.of(1, 2, 3, 4));
-        expected.put("numbers2", List.of(2, 3, 4, 5));
-        expected.put("id", 45);
-        expected.put("default", null);
-        expected.put("checked", false);
-        expected.put("numbers3", List.of(3, 4, 5));
-        expected.put("chars1", List.of("a", "b", "c"));
-        expected.put("chars2", List.of("d", "e", "f"));
+        String content;
+        try {
+            content = FilesUtil.readFile(JSON_FILE);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            expected = mapper.readValue(content, new TypeReference<>() {
+            });
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test

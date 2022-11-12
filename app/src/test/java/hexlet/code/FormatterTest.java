@@ -1,49 +1,35 @@
 package hexlet.code;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import hexlet.code.formatters.Formatter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 class FormatterTest {
+    private static final String JSON_FILE = "src/test/resources/formatter_test/file1.json";
     private static List<DiffElement> diff;
 
     @BeforeAll
     public static void setUp() {
-        diff = new LinkedList<>();
-        diff.add(new DiffElement(DiffElement.Type.NOT_CHANGED, "chars1", List.of("a", "b", "c")));
-        diff.add(new DiffElement(DiffElement.Type.REMOVED, "chars2", List.of("d", "e", "f")));
-        diff.add(new DiffElement(DiffElement.Type.ADDED, "chars2", false));
-        diff.add(new DiffElement(DiffElement.Type.REMOVED, "checked", false));
-        diff.add(new DiffElement(DiffElement.Type.ADDED, "checked", true));
-        diff.add(new DiffElement(DiffElement.Type.REMOVED, "default", null));
-        diff.add(new DiffElement(DiffElement.Type.ADDED, "default", List.of("value1", "value2")));
-        diff.add(new DiffElement(DiffElement.Type.REMOVED, "id", 45));
-        diff.add(new DiffElement(DiffElement.Type.ADDED, "id", null));
-        diff.add(new DiffElement(DiffElement.Type.REMOVED, "key1", "value1"));
-        diff.add(new DiffElement(DiffElement.Type.ADDED, "key2", "value2"));
-        diff.add(new DiffElement(DiffElement.Type.NOT_CHANGED, "numbers1", List.of(1, 2, 3, 4)));
-        diff.add(new DiffElement(DiffElement.Type.REMOVED, "numbers2", List.of(2, 3, 4, 5)));
-        diff.add(new DiffElement(DiffElement.Type.ADDED, "numbers2", List.of(22, 33, 44, 55)));
-        diff.add(new DiffElement(DiffElement.Type.REMOVED, "numbers3", List.of(3, 4, 5)));
-        diff.add(new DiffElement(DiffElement.Type.ADDED, "numbers4", List.of(4, 5, 6)));
+        String content;
+        try {
+            content = FilesUtil.readFile(JSON_FILE);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-        Map<String, Object> obj1 = new LinkedHashMap<>();
-        obj1.put("nestedKey", "value");
-        obj1.put("isNested", true);
-        diff.add(new DiffElement(DiffElement.Type.ADDED, "obj1", obj1));
-
-        diff.add(new DiffElement(DiffElement.Type.REMOVED, "setting1", "Some value"));
-        diff.add(new DiffElement(DiffElement.Type.ADDED, "setting1", "Another value"));
-        diff.add(new DiffElement(DiffElement.Type.REMOVED, "setting2", 200));
-        diff.add(new DiffElement(DiffElement.Type.ADDED, "setting2", 300));
-        diff.add(new DiffElement(DiffElement.Type.REMOVED, "setting3", true));
-        diff.add(new DiffElement(DiffElement.Type.ADDED, "setting3", "none"));
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            diff = mapper.readValue(content, new TypeReference<>() {
+            });
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test
@@ -77,7 +63,6 @@ class FormatterTest {
 
         String actual = Formatter.create("stylish").format(diff);
         Assertions.assertEquals(expected, actual);
-        System.out.println(actual);
     }
 
     @Test
@@ -99,7 +84,6 @@ class FormatterTest {
 
         String actual = Formatter.create("plain").format(diff);
         Assertions.assertEquals(expected, actual);
-        System.out.println(actual);
     }
 
     @Test
@@ -131,7 +115,6 @@ class FormatterTest {
 
         String actual = Formatter.create("json").format(diff);
         Assertions.assertEquals(expected, actual);
-        System.out.println(actual);
     }
 }
 
