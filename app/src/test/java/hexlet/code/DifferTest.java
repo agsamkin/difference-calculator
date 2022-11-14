@@ -3,6 +3,7 @@ package hexlet.code;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ import java.util.Map;
 
 class DifferTest {
     private static final String JSON_FILE = "src/test/resources/differ_test/file1.json";
-    private static List<DiffElement> expected;
+    private static Map<String, List<DiffElement>> expected;
 
     @BeforeAll
     public static void setUp() {
@@ -34,18 +35,18 @@ class DifferTest {
 
     @Test
     void getDiffJsonTest() throws Exception {
-        Map<String, Object> map1 = Parser.parse("src/test/resources/file1.json");
-        Map<String, Object> map2 = Parser.parse("src/test/resources/file2.json");
-        List<DiffElement> actual = Differ.getDiff(map1, map2);
+        Map<String, Object> map1 = Differ.parse("src/test/resources/file1.json");
+        Map<String, Object> map2 = Differ.parse("src/test/resources/file2.json");
+        Map<String, List<DiffElement>> actual = Differ.getDiff(map1, map2);
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     void getDiffYmlTest() throws Exception {
-        Map<String, Object> map1 = Parser.parse("src/test/resources/file1.yml");
-        Map<String, Object> map2 = Parser.parse("src/test/resources/file2.yml");
-        List<DiffElement> actual = Differ.getDiff(map1, map2);
+        Map<String, Object> map1 = Differ.parse("src/test/resources/file1.yml");
+        Map<String, Object> map2 = Differ.parse("src/test/resources/file2.yml");
+        Map<String, List<DiffElement>> actual = Differ.getDiff(map1, map2);
 
         Assertions.assertEquals(expected, actual);
     }

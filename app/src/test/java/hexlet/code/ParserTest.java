@@ -33,13 +33,13 @@ class ParserTest {
 
     @Test
     void parseJsonTest() throws Exception {
-        Map<String, Object> actual = Parser.parse("src/test/resources/file1.json");
+        Map<String, Object> actual = Differ.parse("src/test/resources/file1.json");
         Assertions.assertEquals(actual, expected);
     }
 
     @Test
     void parseYml() throws Exception {
-        Map<String, Object> actual = Parser.parse("src/test/resources/file1.yml");
+        Map<String, Object> actual = Differ.parse("src/test/resources/file1.yml");
         Assertions.assertEquals(actual, expected);
     }
 }

@@ -10,29 +10,32 @@ import java.util.Map;
 
 public final class JsonFormatter implements Formatter {
     @Override
-    public String format(List<DiffElement> diff) {
+    public String format(Map<String, List<DiffElement>> diff) {
         Map<String, Object> result = new LinkedHashMap<>();
-        for (DiffElement diffElement : diff) {
-            result.put(getKey(diffElement), diffElement.value());
+        for (Map.Entry<String, List<DiffElement>> element : diff.entrySet()) {
+            String key = element.getKey();
+            List<DiffElement> values = element.getValue();
+            for (DiffElement value : values) {
+                DiffElement.Type type = value.diffElementType();
+                result.put(getKey(key, type), value.value());
+            }
         }
 
         ObjectMapper objectMapper = new ObjectMapper();
-        String json;
         try {
-            json = objectMapper.writeValueAsString(result);
+            return objectMapper.writeValueAsString(result);
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Error format to json", e);
         }
-        return json;
     }
 
-    private String getKey(DiffElement element) {
-        if (element.diffElementType() == DiffElement.Type.ADDED) {
-            return "+ " + element.key();
-        } else if (element.diffElementType() == DiffElement.Type.REMOVED) {
-            return "- " + element.key();
+    private String getKey(String key, DiffElement.Type type) {
+        if (DiffElement.isAdded(type)) {
+            return "+ " + key;
+        } else if (DiffElement.isRemoved(type)) {
+            return "- " + key;
         } else {
-            return " ".repeat(2) + element.key();
+            return " ".repeat(2) + key;
         }
     }
 }

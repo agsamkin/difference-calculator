@@ -4,15 +4,17 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hexlet.code.formatters.Formatter;
+import hexlet.code.formatters.FormatterFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 
 class FormatterTest {
     private static final String JSON_FILE = "src/test/resources/formatter_test/file1.json";
-    private static List<DiffElement> diff;
+    private static Map<String, List<DiffElement>> diff;
 
     @BeforeAll
     public static void setUp() {
@@ -61,7 +63,8 @@ class FormatterTest {
                   + setting3: none
                 }""";
 
-        String actual = Formatter.create("stylish").format(diff);
+        Formatter formatter = FormatterFactory.getFormatter("stylish");
+        String actual = formatter.format(diff);
         Assertions.assertEquals(expected, actual);
     }
 
@@ -82,38 +85,23 @@ class FormatterTest {
                 Property 'setting2' was updated. From 200 to 300
                 Property 'setting3' was updated. From true to 'none'""";
 
-        String actual = Formatter.create("plain").format(diff);
+        Formatter formatter = FormatterFactory.getFormatter("plain");
+        String actual = formatter.format(diff);
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     void formatJsonTest() {
-        String expected = "{"
-                + "\"  chars1\":[\"a\",\"b\",\"c\"],"
-                + "\"- chars2\":[\"d\",\"e\",\"f\"],"
-                + "\"+ chars2\":false,"
-                + "\"- checked\":false,"
-                + "\"+ checked\":true,"
-                + "\"- default\":null,"
-                + "\"+ default\":[\"value1\",\"value2\"],"
-                + "\"- id\":45,"
-                + "\"+ id\":null,"
-                + "\"- key1\":\"value1\","
-                + "\"+ key2\":\"value2\","
-                + "\"  numbers1\":[1,2,3,4],"
-                + "\"- numbers2\":[2,3,4,5],"
-                + "\"+ numbers2\":[22,33,44,55],"
-                + "\"- numbers3\":[3,4,5],"
-                + "\"+ numbers4\":[4,5,6],"
-                + "\"+ obj1\":{" + "\"nestedKey\":\"value\",\"isNested\":true},"
-                + "\"- setting1\":\"Some value\","
-                + "\"+ setting1\":\"Another value\","
-                + "\"- setting2\":200,"
-                + "\"+ setting2\":300,"
-                + "\"- setting3\":true,"
-                + "\"+ setting3\":\"none\"}";
+        String filepath = "src/test/resources/formatter_test/json_expected";
+        String expected;
+        try {
+            expected = FilesUtil.readFile(filepath);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-        String actual = Formatter.create("json").format(diff);
+        Formatter formatter = FormatterFactory.getFormatter("json");
+        String actual = formatter.format(diff);
         Assertions.assertEquals(expected, actual);
     }
 }
