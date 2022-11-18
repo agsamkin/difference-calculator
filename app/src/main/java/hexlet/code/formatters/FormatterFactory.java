@@ -1,13 +1,17 @@
 package hexlet.code.formatters;
 
-public class FormatterFactory {
+public final class FormatterFactory {
+    private static final String STYLISH = "stylish";
+    private static final String PLAIN = "plain";
+    private static final String JSON = "json";
+
     public static Formatter getFormatter(String format) {
         switch (format) {
-            case "stylish":
+            case STYLISH:
                 return new StylishFormatter();
-            case "plain":
+            case PLAIN:
                 return new PlainFormatter();
-            case "json":
+            case JSON:
                 return new JsonFormatter();
             default:
                 throw new RuntimeException("Unsupported output format");
