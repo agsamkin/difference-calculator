@@ -38,7 +38,7 @@ class ParserTest {
     }
 
     @Test
-    void parseYml() throws Exception {
+    void parseYmlTest() throws Exception {
         Map<String, Object> actual = Differ.parse("src/test/resources/file1.yml");
         Assertions.assertEquals(actual, expected);
     }
