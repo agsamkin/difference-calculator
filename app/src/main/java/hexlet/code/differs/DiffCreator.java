@@ -1,4 +1,4 @@
-package hexlet.code.differ;
+package hexlet.code.differs;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

@@ -2,7 +2,7 @@ package hexlet.code;
 
 import java.util.concurrent.Callable;
 
-import hexlet.code.differ.Differ;
+import hexlet.code.differs.Differ;
 import picocli.CommandLine;
 
 import static picocli.CommandLine.Command;

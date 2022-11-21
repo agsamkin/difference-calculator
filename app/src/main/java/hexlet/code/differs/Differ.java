@@ -1,4 +1,4 @@
-package hexlet.code.differ;
+package hexlet.code.differs;
 
 import hexlet.code.FilesUtil;
 import hexlet.code.formatters.Formatter;
