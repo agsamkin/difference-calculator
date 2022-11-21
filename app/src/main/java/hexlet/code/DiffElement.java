@@ -1,4 +1,4 @@
-package hexlet.code.differs;
+package hexlet.code;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

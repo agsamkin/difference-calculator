@@ -1,6 +1,5 @@
-package hexlet.code.differs;
+package hexlet.code;
 
-import hexlet.code.FilesUtil;
 import hexlet.code.formatters.Formatter;
 import hexlet.code.formatters.FormatterFactory;
 import hexlet.code.parsers.Parser;
