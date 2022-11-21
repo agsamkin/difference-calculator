@@ -1,4 +1,4 @@
-package hexlet.code;
+package hexlet.code.differ;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -8,16 +8,17 @@ public record DiffElement(Type diffElementType, Object value) {
     public enum Type {
         ADDED("added"),
         REMOVED("removed"),
+        UPDATED("updated"),
         NOT_CHANGED("not_changed");
 
-        private String formatted;
+        private String type;
 
-        Type(String formattedValue) {
-            this.formatted = formattedValue;
+        Type(String formattedType) {
+            this.type = formattedType;
         }
 
-        public String getFormatted() {
-            return formatted;
+        public String getType() {
+            return type;
         }
     }
 
@@ -27,6 +28,10 @@ public record DiffElement(Type diffElementType, Object value) {
 
     public static boolean isRemoved(Type type) {
         return Type.REMOVED.equals(type);
+    }
+
+    public static boolean isUpdated(Type type) {
+        return Type.UPDATED.equals(type);
     }
 
     public static boolean isNotChanged(Type type) {

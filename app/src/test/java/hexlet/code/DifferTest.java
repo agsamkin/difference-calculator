@@ -1,54 +1,97 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import hexlet.code.differ.Differ;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-import java.util.Map;
+public class DifferTest {
+    private static final String JSON_FILE_1 = "src/test/resources/file1.json";
+    private static final String JSON_FILE_2 = "src/test/resources/file2.json";
 
-class DifferTest {
-    private static final String JSON_FILE = "src/test/resources/differ_test/file1.json";
-    private static Map<String, List<DiffElement>> expected;
+    private static final String YML_FILE_1 = "src/test/resources/file1.yml";
+    private static final String YML_FILE_2 = "src/test/resources/file2.yml";
 
-    @BeforeAll
-    public static void setUp() {
-        String content;
+    private static final String STYLISH_EXPECTED = "src/test/resources/stylish_expected";
+    private static final String PLAIN_EXPECTED = "src/test/resources/plain_expected";
+    private static final String JSON_EXPECTED = "src/test/resources/json_expected";
+
+    @Test
+    void generateStylishTest() throws Exception {
+        String actual1 = Differ.generate(JSON_FILE_1, JSON_FILE_2, "stylish");
+
+        String expected1;
         try {
-            content = FilesUtil.readFile(JSON_FILE);
+            expected1 = FilesUtil.readFile(STYLISH_EXPECTED);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        ObjectMapper mapper = new ObjectMapper();
+        Assertions.assertEquals(expected1, actual1);
+
+
+        String actual2 = Differ.generate(YML_FILE_1, YML_FILE_2, "stylish");
+
+        String expected2;
         try {
-            expected = mapper.readValue(content, new TypeReference<>() {
-            });
-        } catch (JsonProcessingException e) {
+            expected2 = FilesUtil.readFile(STYLISH_EXPECTED);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+        Assertions.assertEquals(expected2, actual2);
     }
 
     @Test
-    void getDiffJsonTest() throws Exception {
-        Map<String, Object> map1 = Differ.parse("src/test/resources/file1.json");
-        Map<String, Object> map2 = Differ.parse("src/test/resources/file2.json");
-        Map<String, List<DiffElement>> actual = Differ.getDiff(map1, map2);
+    void generatePlainTest() throws Exception {
+        String actual1 = Differ.generate(JSON_FILE_1, JSON_FILE_2, "plain");
 
-        Assertions.assertEquals(expected, actual);
+        String expected1;
+        try {
+            expected1 = FilesUtil.readFile(PLAIN_EXPECTED);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        Assertions.assertEquals(expected1, actual1);
+
+
+        String actual2 = Differ.generate(YML_FILE_1, YML_FILE_2, "plain");
+
+        String expected2;
+        try {
+            expected2 = FilesUtil.readFile(PLAIN_EXPECTED);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        Assertions.assertEquals(expected2, actual2);
     }
 
     @Test
-    void getDiffYmlTest() throws Exception {
-        Map<String, Object> map1 = Differ.parse("src/test/resources/file1.yml");
-        Map<String, Object> map2 = Differ.parse("src/test/resources/file2.yml");
-        Map<String, List<DiffElement>> actual = Differ.getDiff(map1, map2);
+    void generateJsonTest() throws Exception {
+        String actual1 = Differ.generate(JSON_FILE_1, JSON_FILE_2, "json");
 
-        Assertions.assertEquals(expected, actual);
+        String expected1;
+        try {
+            expected1 = FilesUtil.readFile(JSON_EXPECTED);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        Assertions.assertEquals(expected1, actual1);
+
+
+        String actual2 = Differ.generate(YML_FILE_1, YML_FILE_2, "json");
+
+        String expected2;
+        try {
+            expected2 = FilesUtil.readFile(JSON_EXPECTED);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        Assertions.assertEquals(expected2, actual2);
     }
 }
+
 
