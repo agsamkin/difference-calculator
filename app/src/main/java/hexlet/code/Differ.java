@@ -16,7 +16,7 @@ public final class Differ {
         Map<String, Object> map1 = parse(filePath1);
         Map<String, Object> map2 = parse(filePath2);
 
-        Map<String, DiffElement> diff = DiffCreator.getDiff(map1, map2);
+        Map<String, DiffElement> diff = DiffBuilder.getDiff(map1, map2);
 
         Formatter formatter = FormatterFactory.getFormatter(format);
         return formatter.format(diff);
