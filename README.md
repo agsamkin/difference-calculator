@@ -34,4 +34,4 @@ Compares two configuration files and shows a difference.
 
 #### Demo:
 
-[![asciicast](https://asciinema.org/a/kNKIDcW5ttv7Wa6hVzTOAcCSO.svg)](https://asciinema.org/a/kNKIDcW5ttv7Wa6hVzTOAcCSO)
+[![asciicast](https://asciinema.org/a/X40fHIDxK6CJ6WREhuBYV2Usi.svg)](https://asciinema.org/a/X40fHIDxK6CJ6WREhuBYV2Usi)
