@@ -15,6 +15,17 @@ public class DifferTest {
     private static final String JSON_EXPECTED = "src/test/resources/json_expected";
 
     @Test
+    void generateDefaultFormatTest() throws Exception {
+        String actual1 = Differ.generate(JSON_FILE_1, JSON_FILE_2);
+        String expected1 = FilesUtil.readFile(STYLISH_EXPECTED);
+        Assertions.assertEquals(expected1, actual1);
+
+        String actual2 = Differ.generate(YML_FILE_1, YML_FILE_2);
+        String expected2 = FilesUtil.readFile(STYLISH_EXPECTED);
+        Assertions.assertEquals(expected2, actual2);
+    }
+
+    @Test
     void generateStylishTest() throws Exception {
         String actual1 = Differ.generate(JSON_FILE_1, JSON_FILE_2, "stylish");
         String expected1 = FilesUtil.readFile(STYLISH_EXPECTED);
