@@ -1,9 +1,5 @@
 ### JSON and YAML differencing calculator
 
-#### Hexlet tests and linter status:
-
-[![Actions Status](https://github.com/agsamkin/java-project-71/workflows/hexlet-check/badge.svg)](https://github.com/agsamkin/java-project-71/actions)
-
 #### CI:
 
 [![my-workflow](https://github.com/agsamkin/java-project-71/actions/workflows/my-workflow.yml/badge.svg)](https://github.com/agsamkin/java-project-71/actions/workflows/my-workflow.yml)
